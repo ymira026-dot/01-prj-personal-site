@@ -3,7 +3,8 @@
     "vscode": {
       "extensions": [
         "GitHub.copilot",
-        "ms-vscode.live-server"
+        "ms-vscode.live-server",
+        "GitHub.copilot-chat"
       ],
       "settings": {
         "livePreview.autoRefreshPreview": "On All Changes in Editor",
