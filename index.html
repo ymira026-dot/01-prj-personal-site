@@ -180,8 +180,24 @@
 
     <!-- Script for Project Management -->
     <script>
+        // Check if localStorage is available
+        function isLocalStorageAvailable() {
+            try {
+                const test = '__localStorage_test__';
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+
         // Initialize password from localStorage or set default
         function getProjectPassword() {
+            if (!isLocalStorageAvailable()) {
+                console.warn('localStorage not available');
+                return 'admin';
+            }
             let password = localStorage.getItem('portfolio-password');
             if (!password) {
                 password = 'admin'; // Default password
@@ -270,6 +286,10 @@
 
         // Function to load projects list
         function loadProjectsList() {
+            if (!isLocalStorageAvailable()) {
+                projectsList.innerHTML = '<p>Error: Cannot load projects. You may be in private browsing mode.</p>';
+                return;
+            }
             let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
             
             if (projects.length === 0) {
@@ -292,6 +312,10 @@
 
         // Function to select project for editing
         function selectProjectToEdit(projectId) {
+            if (!isLocalStorageAvailable()) {
+                alert('Error: Cannot load project. You may be in private browsing mode.');
+                return;
+            }
             let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
             const project = projects.find(p => p.id === projectId);
 
@@ -312,6 +336,11 @@
 
         // Function to update project in storage
         function updateProjectInStorage(projectId, title, description, link) {
+            if (!isLocalStorageAvailable()) {
+                console.error('localStorage not available, cannot update project');
+                alert('Error: Cannot update project. You may be in private browsing mode.');
+                return;
+            }
             let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
             projects = projects.map(p => {
                 if (p.id === projectId) {
@@ -325,6 +354,7 @@
                 return p;
             });
             localStorage.setItem('portfolio-projects', JSON.stringify(projects));
+            console.log('Project updated:', projectId);
         }
 
         // Load projects from localStorage when page loads
@@ -427,6 +457,11 @@
                 return;
             }
 
+            if (!isLocalStorageAvailable()) {
+                alert('Cannot save password: localStorage not available. You may be in private browsing mode.');
+                return;
+            }
+
             localStorage.setItem('portfolio-password', newPassword);
             alert('Password changed successfully!');
         }
@@ -473,15 +508,27 @@
         }
 
         // Function to save project to localStorage
+        // Function to save project to localStorage
         function saveProjectToStorage(project) {
+            if (!isLocalStorageAvailable()) {
+                console.error('localStorage not available, cannot save project');
+                alert('Error: Cannot save project. You may be in private browsing mode.');
+                return;
+            }
             let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
             projects.push(project);
             localStorage.setItem('portfolio-projects', JSON.stringify(projects));
+            console.log('Project saved:', project);
         }
 
         // Function to load projects from localStorage
         function loadProjectsFromStorage() {
+            if (!isLocalStorageAvailable()) {
+                console.warn('localStorage not available');
+                return;
+            }
             let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
+            console.log('Loaded projects from storage:', projects);
             
             // First, reset all non-placeholder cards to placeholders
             const allCards = document.querySelectorAll('.project-card');
@@ -518,9 +565,12 @@
                 }
 
                 // Remove from localStorage
-                let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
-                projects = projects.filter(p => p.id !== projectId);
-                localStorage.setItem('portfolio-projects', JSON.stringify(projects));
+                if (isLocalStorageAvailable()) {
+                    let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
+                    projects = projects.filter(p => p.id !== projectId);
+                    localStorage.setItem('portfolio-projects', JSON.stringify(projects));
+                    console.log('Project deleted:', projectId);
+                }
 
                 // Reload projects from storage to repopulate placeholders if needed
                 loadProjectsFromStorage();
