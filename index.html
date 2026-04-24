@@ -11,8 +11,13 @@
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <h1 class="logo">Portfolio</h1>
-            <ul class="nav-links">
+            <div class="nav-top">
+                <h1 class="logo">Portfolio</h1>
+                <button id="nav-toggle" class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-controls="nav-links" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -80,21 +85,39 @@
         <div class="container">
             <h2>My Projects</h2>
             <div class="projects-grid">
-                <div class="project-card placeholder-card" data-placeholder="true">
-                    <h3>Project 1</h3>
-                    <p>Coming soon! This will be my first official project from the course.</p>
-                    <a href="#" class="btn-small">Learn More</a>
+                <div class="project-card">
+                    <h3>Intel Timeline</h3>
+                    <p>An interactive timeline showing Intel's growth from its founding to its sustainability milestones.</p>
+                    <a href="https://ymira026-dot.github.io/02-prj-intel-sustainability/" class="btn-small" target="_blank">View Project</a>
                 </div>
-                <div class="project-card placeholder-card" data-placeholder="true">
-                    <h3>Project 2</h3>
-                    <p>Coming soon! This will be my second official project from the course.</p>
-                    <a href="#" class="btn-small">Learn More</a>
+                <div class="project-card">
+                    <h3>Intel Localization</h3>
+                    <p>A multi-language content management system built for global marketing teams.</p>
+                    <a href="https://ymira026-dot.github.io/03-prj-intel-localization-/" class="btn-small" target="_blank">View Project</a>
                 </div>
-                <div class="project-card placeholder-card" data-placeholder="true">
-                    <h3>Project 3</h3>
-                    <p>Coming soon! This will be my third official project from the course.</p>
-                    <a href="#" class="btn-small">Learn More</a>
+                <div class="project-card">
+                    <h3>Sustainability Summit Check-In</h3>
+                    <p>A real-time check-in system for tracking attendance and team participation at sustainability events.</p>
+                    <a href="https://ymira026-dot.github.io/05-prj-intel-event-check-in/" class="btn-small" target="_blank">View Project</a>
                 </div>
+                <div class="project-card">
+                    <h3>Water Rush</h3>
+                    <p>An interactive strategy game about protecting a village's clean water supply through smart choices.</p>
+                    <a href="https://ymira026-dot.github.io/05-charity-water-game-prototype/" class="btn-small" target="_blank">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>NASA Space Explorer</h3>
+                    <p>An image gallery that pulls NASA space photos based on a selected date range.</p>
+                    <a href="https://ymira026-dot.github.io/07-nasa-space-explorer/" class="btn-small" target="_blank">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>L'Oréal Beauty Assistant</h3>
+                    <p>A smart product advisor chatbot that offers beauty recommendations inspired by L'Oréal.</p>
+                    <a href="https://ymira026-dot.github.io/08-prj-loreal-chatbot/" class="btn-small" target="_blank">View Project</a>
+                </div>
+            </div>
+            <div class="projects-more">
+                <a href="projects.html" class="btn-small">More Projects...</a>
             </div>
         </div>
     </section>
@@ -111,66 +134,6 @@
         </div>
     </section>
 
-    <!-- Modal for Adding/Editing Projects -->
-    <div id="add-project-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            
-            <!-- Add Project Section -->
-            <div id="add-section">
-                <h2>Add New Project</h2>
-                <form id="add-project-form">
-                    <!-- Project Title -->
-                    <label for="project-title">Project Title:</label>
-                    <input type="text" id="project-title" placeholder="Enter project title" required>
-
-                    <!-- Project Description -->
-                    <label for="project-desc">Project Description:</label>
-                    <textarea id="project-desc" placeholder="Enter project description" rows="4" required></textarea>
-
-                    <!-- Project Link (Optional) -->
-                    <label for="project-link">Project Link (Optional):</label>
-                    <input type="url" id="project-link" placeholder="https://example.com">
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="btn-submit">Add Project</button>
-                </form>
-                <button type="button" class="btn-secondary" onclick="switchToEditMode()">Edit Existing Project</button>
-            </div>
-            
-            <!-- Edit Project Section -->
-            <div id="edit-section" style="display: none;">
-                <h2>Edit Project</h2>
-                <div id="projects-list">
-                    <p>Loading projects...</p>
-                </div>
-                <button type="button" class="btn-secondary" onclick="switchToAddMode()">Back to Add Project</button>
-            </div>
-            
-            <!-- Edit Form Section (shown when project is selected) -->
-            <div id="edit-form-section" style="display: none;">
-                <h2>Edit Project</h2>
-                <form id="edit-project-form">
-                    <!-- Project Title -->
-                    <label for="edit-project-title">Project Title:</label>
-                    <input type="text" id="edit-project-title" placeholder="Enter project title" required>
-
-                    <!-- Project Description -->
-                    <label for="edit-project-desc">Project Description:</label>
-                    <textarea id="edit-project-desc" placeholder="Enter project description" rows="4" required></textarea>
-
-                    <!-- Project Link (Optional) -->
-                    <label for="edit-project-link">Project Link (Optional):</label>
-                    <input type="url" id="edit-project-link" placeholder="https://example.com">
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="btn-submit">Save Changes</button>
-                </form>
-                <button type="button" class="btn-secondary" onclick="switchToEditMode()">Back to Project List</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -178,403 +141,47 @@
         </div>
     </footer>
 
-    <!-- Script for Project Management -->
+    <!-- Script for Mobile Navigation -->
     <script>
-        // Check if localStorage is available
-        function isLocalStorageAvailable() {
-            try {
-                const test = '__localStorage_test__';
-                localStorage.setItem(test, test);
-                localStorage.removeItem(test);
-                return true;
-            } catch (e) {
-                return false;
-            }
-        }
+        // Mobile navigation toggle
+        const navToggleBtn = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const navToggleIcon = navToggleBtn ? navToggleBtn.querySelector('i') : null;
 
-        // Initialize password from localStorage or set default
-        function getProjectPassword() {
-            if (!isLocalStorageAvailable()) {
-                console.warn('localStorage not available');
-                return 'admin';
-            }
-            let password = localStorage.getItem('portfolio-password');
-            if (!password) {
-                password = 'admin'; // Default password
-                localStorage.setItem('portfolio-password', password);
-            }
-            return password;
-        }
+        if (navToggleBtn && navLinks) {
+            function setNavToggleState(isOpen) {
+                navToggleBtn.setAttribute('aria-expanded', String(isOpen));
 
-        // Get modal and form elements for add project
-        const modal = document.getElementById('add-project-modal');
-        const addProjectForm = document.getElementById('add-project-form');
-        const closeBtn = document.querySelector('.close-btn');
-        const projectsGrid = document.querySelector('.projects-grid');
-        const projectTitleInput = document.getElementById('project-title');
-        const projectDescInput = document.getElementById('project-desc');
-        const projectLinkInput = document.getElementById('project-link');
-
-        // Get edit form elements
-        const editProjectForm = document.getElementById('edit-project-form');
-        const editProjectTitleInput = document.getElementById('edit-project-title');
-        const editProjectDescInput = document.getElementById('edit-project-desc');
-        const editProjectLinkInput = document.getElementById('edit-project-link');
-        let currentEditingProjectId = null;
-
-        // Get section elements
-        const addSection = document.getElementById('add-section');
-        const editSection = document.getElementById('edit-section');
-        const editFormSection = document.getElementById('edit-form-section');
-        const projectsList = document.getElementById('projects-list');
-
-        // Handle edit form submission
-        editProjectForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Get form values
-            const title = editProjectTitleInput.value.trim();
-            const description = editProjectDescInput.value.trim();
-            const link = editProjectLinkInput.value.trim();
-
-            // Validate inputs
-            if (!title || !description) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-
-            // Update project in storage
-            updateProjectInStorage(currentEditingProjectId, title, description, link);
-
-            // Find and update the card
-            const projectCard = document.getElementById('project-' + currentEditingProjectId);
-            if (projectCard) {
-                // Rebuild card HTML
-                let cardHTML = `
-                    <h3>${escapeHtml(title)}</h3>
-                    <p>${escapeHtml(description)}</p>
-                `;
-                if (link) {
-                    cardHTML += `<a href="${escapeHtml(link)}" class="btn-small" target="_blank">Learn More</a>`;
-                } else {
-                    cardHTML += `<a href="#" class="btn-small">Learn More</a>`;
+                if (navToggleIcon) {
+                    navToggleIcon.classList.toggle('fa-bars', !isOpen);
+                    navToggleIcon.classList.toggle('fa-xmark', isOpen);
+                    navToggleIcon.classList.toggle('is-open', isOpen);
                 }
-                projectCard.innerHTML = cardHTML;
             }
 
-            // Reset form and go back to project list
-            editProjectForm.reset();
-            switchToEditMode();
-            alert('Project updated successfully!');
-        });
-
-        // Function to switch to edit mode
-        function switchToEditMode() {
-            addSection.style.display = 'none';
-            editFormSection.style.display = 'none';
-            editSection.style.display = 'block';
-            loadProjectsList();
-        }
-
-        // Function to switch to add mode
-        function switchToAddMode() {
-            addSection.style.display = 'block';
-            editSection.style.display = 'none';
-            editFormSection.style.display = 'none';
-            addProjectForm.reset();
-        }
-
-        // Function to load projects list
-        function loadProjectsList() {
-            if (!isLocalStorageAvailable()) {
-                projectsList.innerHTML = '<p>Error: Cannot load projects. You may be in private browsing mode.</p>';
-                return;
-            }
-            let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
-            
-            if (projects.length === 0) {
-                projectsList.innerHTML = '<p>No projects to edit.</p>';
-                return;
-            }
-
-            let listHTML = '<div class="projects-list-container">';
-            projects.forEach(project => {
-                listHTML += `
-                    <div class="project-list-item" onclick="selectProjectToEdit(${project.id})">
-                        <h4>${escapeHtml(project.title)}</h4>
-                        <p>${escapeHtml(project.description.substring(0, 60))}...</p>
-                    </div>
-                `;
+            // Toggle menu on button click
+            navToggleBtn.addEventListener('click', function() {
+                const isOpen = navLinks.classList.toggle('nav-open');
+                setNavToggleState(isOpen);
             });
-            listHTML += '</div>';
-            projectsList.innerHTML = listHTML;
-        }
 
-        // Function to select project for editing
-        function selectProjectToEdit(projectId) {
-            if (!isLocalStorageAvailable()) {
-                alert('Error: Cannot load project. You may be in private browsing mode.');
-                return;
-            }
-            let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
-            const project = projects.find(p => p.id === projectId);
-
-            if (!project) {
-                alert('Project not found.');
-                return;
-            }
-
-            currentEditingProjectId = projectId;
-            editProjectTitleInput.value = project.title;
-            editProjectDescInput.value = project.description;
-            editProjectLinkInput.value = project.link || '';
-
-            editSection.style.display = 'none';
-            editFormSection.style.display = 'block';
-            editProjectTitleInput.focus();
-        }
-
-        // Function to update project in storage
-        function updateProjectInStorage(projectId, title, description, link) {
-            if (!isLocalStorageAvailable()) {
-                console.error('localStorage not available, cannot update project');
-                alert('Error: Cannot update project. You may be in private browsing mode.');
-                return;
-            }
-            let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
-            projects = projects.map(p => {
-                if (p.id === projectId) {
-                    return {
-                        id: projectId,
-                        title: title,
-                        description: description,
-                        link: link
-                    };
-                }
-                return p;
+            // Close menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('nav-open');
+                    setNavToggleState(false);
+                });
             });
-            localStorage.setItem('portfolio-projects', JSON.stringify(projects));
-            console.log('Project updated:', projectId);
-        }
 
-        // Load projects from localStorage when page loads
-        window.addEventListener('DOMContentLoaded', loadProjectsFromStorage);
-
-        // Listen for Ctrl+Shift+A keyboard shortcut to add project
-        document.addEventListener('keydown', function(event) {
-            // Check if Ctrl+Shift+A is pressed
-            if (event.ctrlKey && event.shiftKey && event.key === 'A') {
-                event.preventDefault(); // Prevent browser default behavior
-                openAddProjectModal();
-            }
-            // Check if Ctrl+Shift+P is pressed to change password
-            if (event.ctrlKey && event.shiftKey && event.key === 'P') {
-                event.preventDefault();
-                changePassword();
-            }
-        });
-
-        // Function to open add project modal with password prompt
-        function openAddProjectModal() {
-            const password = prompt('Enter password to add a project:');
-            if (password === null) return; // User cancelled
-
-            if (password !== getProjectPassword()) {
-                alert('Incorrect password.');
-                return;
-            }
-
-            // Password is correct, open the modal and show add section
-            switchToAddMode();
-            modal.style.display = 'block';
-            projectTitleInput.focus(); // Focus on title field
-        }
-
-        // Close modal when X button is clicked
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-            addProjectForm.reset(); // Clear form
-        });
-
-        // Close modal when clicking outside the modal content
-        window.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                addProjectForm.reset();
-            }
-        });
-
-        // Handle form submission
-        addProjectForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Get form values
-            const title = projectTitleInput.value.trim();
-            const description = projectDescInput.value.trim();
-            const link = projectLinkInput.value.trim();
-
-            // Validate inputs
-            if (!title || !description) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-
-            // Create new project card
-            const newProject = {
-                title: title,
-                description: description,
-                link: link,
-                id: Date.now() // Unique ID based on timestamp
-            };
-
-            // Add project card to the page
-            createProjectCard(newProject);
-
-            // Save projects to localStorage
-            saveProjectToStorage(newProject);
-
-            // Reset form and close modal
-            addProjectForm.reset();
-            modal.style.display = 'none';
-            alert('Project added successfully!');
-        });
-
-        // Function to change password
-        function changePassword() {
-            const currentPassword = prompt('Enter current password:');
-            if (currentPassword === null) return; // User cancelled
-
-            if (currentPassword !== getProjectPassword()) {
-                alert('Incorrect current password.');
-                return;
-            }
-
-            const newPassword = prompt('Enter new password:');
-            if (newPassword === null) return; // User cancelled
-
-            if (newPassword.trim() === '') {
-                alert('Password cannot be empty.');
-                return;
-            }
-
-            if (!isLocalStorageAvailable()) {
-                alert('Cannot save password: localStorage not available. You may be in private browsing mode.');
-                return;
-            }
-
-            localStorage.setItem('portfolio-password', newPassword);
-            alert('Password changed successfully!');
-        }
-
-        // Function to create a project card with the same styling
-        function createProjectCard(project) {
-            // Build the HTML for the card
-            let cardHTML = `
-                <h3>${escapeHtml(project.title)}</h3>
-                <p>${escapeHtml(project.description)}</p>
-            `;
-
-            // Add link button if provided
-            if (project.link) {
-                cardHTML += `<a href="${escapeHtml(project.link)}" class="btn-small" target="_blank">Learn More</a>`;
-            } else {
-                cardHTML += `<a href="#" class="btn-small">Learn More</a>`;
-            }
-
-            // Try to find a placeholder card to replace
-            const placeholderCard = document.querySelector('.placeholder-card[data-placeholder="true"]');
-
-            if (placeholderCard) {
-                // Replace the placeholder card
-                placeholderCard.id = 'project-' + project.id;
-                placeholderCard.removeAttribute('data-placeholder');
-                placeholderCard.classList.remove('placeholder-card');
-                placeholderCard.innerHTML = cardHTML;
-            } else {
-                // If no placeholder available, create a new card
-                const projectCard = document.createElement('div');
-                projectCard.className = 'project-card';
-                projectCard.id = 'project-' + project.id;
-                projectCard.innerHTML = cardHTML;
-                projectsGrid.appendChild(projectCard);
-            }
-        }
-
-        // Function to escape HTML to prevent XSS attacks
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // Function to save project to localStorage
-        // Function to save project to localStorage
-        function saveProjectToStorage(project) {
-            if (!isLocalStorageAvailable()) {
-                console.error('localStorage not available, cannot save project');
-                alert('Error: Cannot save project. You may be in private browsing mode.');
-                return;
-            }
-            let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
-            projects.push(project);
-            localStorage.setItem('portfolio-projects', JSON.stringify(projects));
-            console.log('Project saved:', project);
-        }
-
-        // Function to load projects from localStorage
-        function loadProjectsFromStorage() {
-            if (!isLocalStorageAvailable()) {
-                console.warn('localStorage not available');
-                return;
-            }
-            let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
-            console.log('Loaded projects from storage:', projects);
-            
-            // First, reset all non-placeholder cards to placeholders
-            const allCards = document.querySelectorAll('.project-card');
-            allCards.forEach((card, index) => {
-                if (index < 3 && !card.hasAttribute('data-placeholder')) {
-                    // Reset to placeholder
-                    card.setAttribute('data-placeholder', 'true');
-                    card.classList.add('placeholder-card');
-                    card.removeAttribute('id');
-                    card.innerHTML = `
-                        <h3>Project ${index + 1}</h3>
-                        <p>Coming soon! This will be my official project from the course.</p>
-                        <a href="#" class="btn-small">Learn More</a>
-                    `;
-                } else if (index >= 3) {
-                    // Remove cards beyond the first 3
-                    card.remove();
+            // Close menu when screen gets wider
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('nav-open');
+                    setNavToggleState(false);
                 }
             });
 
-            // Then load projects from storage
-            projects.forEach(project => {
-                createProjectCard(project);
-            });
-        }
-
-        // Function to delete a project
-        function deleteProject(projectId) {
-            if (confirm('Are you sure you want to delete this project?')) {
-                // Remove card from page
-                const card = document.getElementById('project-' + projectId);
-                if (card) {
-                    card.remove();
-                }
-
-                // Remove from localStorage
-                if (isLocalStorageAvailable()) {
-                    let projects = JSON.parse(localStorage.getItem('portfolio-projects')) || [];
-                    projects = projects.filter(p => p.id !== projectId);
-                    localStorage.setItem('portfolio-projects', JSON.stringify(projects));
-                    console.log('Project deleted:', projectId);
-                }
-
-                // Reload projects from storage to repopulate placeholders if needed
-                loadProjectsFromStorage();
-            }
+            setNavToggleState(false);
         }
     </script>
 </body>
